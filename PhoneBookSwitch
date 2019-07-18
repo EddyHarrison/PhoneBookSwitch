@@ -1,0 +1,293 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace PhoneBook
+{
+    class NoteBook
+    {
+        static int a = 0;
+        static int b = 0;
+        Dictionary<int, Person> book = new Dictionary<int, Person>();
+        static bool Numeric(string stroka)
+        {
+            foreach (char t in stroka)
+                if (char.IsNumber(t))
+                {
+                    return true;
+                }
+            return false;
+        }
+        static void Main(string[] args)
+        {
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.Clear();
+            string st = " ";
+            NoteBook note = new NoteBook();
+            Console.WriteLine("Добро пожаловать в приложение <БЛОКНОТ>.");
+            while (!st.Equals("6"))
+            {
+                Console.WriteLine(" Перед Вами МЕНЮ приложения <БЛОКНОТ> \n Выберите одну из нужных Вам задач: ");
+                Console.WriteLine(" 1 - Добавить новую запись. " + "\n 2 - Редактировать созданную запись. " + "\n 3 - Удаление выбранной записи. " + "\n 4 - Просмотр выбранной записи. " +
+                    "\n 5 - Просмотр всех созданных записей с краткой информацией. " + "\n 6 - Выход из приложения.");
+                st = Console.ReadLine();
+                note.Operation(st);
+            }
+        }
+        public void Operation(string st)
+        {
+            string Surname = "";
+            string Name = "";
+            string Patronymic = "";
+            long Phone = 0;
+            string Country = "";
+            string BirthDate = "";
+            string Organization = "";
+            string Post = "";
+            string Notes = "";
+
+            switch (st.ToUpper())
+            {
+                case "1":
+                    {
+
+                        Console.WriteLine("ID-" + b);
+                        while (Surname == "")
+                        {
+
+                            Console.WriteLine("Введите фамилию: ");
+                            Surname = Console.ReadLine();
+                            if (Surname == "")
+                            {
+                                Console.WriteLine(" ВЫ НИЧЕГО НЕ ВВЕЛИ, ПОВТОРИТЕ СНОВА!! ");
+                            }
+                        }
+                        while (Name == "")
+                        {
+                            Console.WriteLine("Введите имя: ");
+                            Name = Console.ReadLine();
+                            if (Name == "")
+                            {
+                                Console.WriteLine(" ВЫ НИЧЕГО НЕ ВВЕЛИ, ПОВТОРИТЕ СНОВА!! ");
+                            }
+                        }
+
+                        Console.WriteLine("Введите отчество: ");
+                        Patronymic = Console.ReadLine();
+                        while (Phone == 0)
+                        {
+                            Console.WriteLine("Введите номер телефона: ");
+                            string str = Console.ReadLine();
+                            if (Numeric(str))
+                            {
+                                Phone = Convert.ToInt64(str);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Вы ввели не цифры");
+                            }
+                        }
+                        while (Country == "")
+                        {
+                            Console.WriteLine("Введите страну: ");
+                            Country = Console.ReadLine();
+                            if (Country == "")
+                            {
+                                Console.WriteLine(" ВЫ НИЧЕГО НЕ ВВЕЛИ, ПОВТОРИТЕ СНОВА!! ");
+                            }
+                        }
+                        Console.WriteLine("Введите дату рождения: ");
+                        BirthDate = Console.ReadLine();
+                        Console.WriteLine("Введите организацию: ");
+                        Organization = Console.ReadLine();
+                        Console.WriteLine("Введите Должность: ");
+                        Post = Console.ReadLine();
+                        Console.WriteLine("Введите прочие заметки: ");
+                        Notes = Console.ReadLine();
+                        book[b] = new Person(Surname, Name, Patronymic, Phone, Country, BirthDate, Organization, Post, Notes);
+                        b++;
+                    }
+                    break;
+                case "2":
+                    {
+                        a = 0;
+                        Console.WriteLine("Введите ID человека, который вам нужен: ");
+                        int q = int.Parse(Console.ReadLine());
+                        string str = "";
+                        NoteBook sr = new NoteBook();
+                        Console.WriteLine("Введите то,что хотите поменять: Фамилия, Имя, Отчество, Телефон, Страна, Дата рождения, Организация, Должность, Прочие заметки. ");
+                        str = Console.ReadLine();
+                        sr.Operation(str);
+
+                        if (str == "Фамилия")
+                        {
+                            bool r = true;
+                            while (r)
+                            {
+                                Console.WriteLine("Введите новую фамилию: ");
+                                book.ElementAt(q).Value.Surname = Console.ReadLine();
+                                Console.WriteLine("Редактирование прошло успешно");
+                                r = false;
+                                break;
+                            }
+                        }
+
+                        else if (str == "Имя")
+                        {
+                            Console.WriteLine("Введите новое имя: ");
+                            book.ElementAt(q).Value.Name = Console.ReadLine();
+                            Console.WriteLine("Редактирование прошло успешно");
+                        }
+                        else if (str == "Отчество")
+                        {
+                            Console.WriteLine("Введите новое  отчество: ");
+                            book.ElementAt(q).Value.Patronymic = Console.ReadLine();
+                            Console.WriteLine("Редактирование прошло успешно");
+                        }
+                        else if (str == "Телефон")
+                        {
+                            Console.WriteLine("Введите новый номер телефона: ");
+                            while (Phone == 0)
+                            {
+                                Console.WriteLine("Введите номер телефона: ");
+                                str = Console.ReadLine();
+                                if (Numeric(str))
+                                {
+                                    book.ElementAt(q).Value.Phone = Convert.ToInt64(Phone);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Вы ввели не цифры");
+                                }
+                            }
+
+                            Console.WriteLine("Редактирование прошло успешно");
+                        }
+                        else if (str == "Страна")
+                        {
+                            Console.WriteLine("Введите новую страну: ");
+                            book.ElementAt(q).Value.Country = Console.ReadLine();
+                            Console.WriteLine("Редактирование прошло успешно");
+                        }
+                        else if (str == "Дата рождения")
+                        {
+                            Console.WriteLine("Введите новую дату рождения: ");
+                            book.ElementAt(q).Value.BirthDate = Console.ReadLine();
+                            Console.WriteLine("Редактирование прошло успешно");
+                        }
+                        else if (str == "Организация")
+                        {
+                            Console.WriteLine("Введите новую организацию: ");
+                            book.ElementAt(q).Value.Organization = Console.ReadLine();
+                            Console.WriteLine("Редактирование прошло успешно");
+                        }
+                        else if (str == "Должность")
+                        {
+                            Console.WriteLine("Введите новую должность: ");
+                            book.ElementAt(q).Value.Post = Console.ReadLine();
+                            Console.WriteLine("Редактирование прошло успешно");
+                        }
+                        else if (str == "Другое")
+                        {
+                            Console.WriteLine("Введите новые заметки: ");
+                            book.ElementAt(q).Value.Notes = Console.ReadLine();
+                            Console.WriteLine("Редактирование прошло успешно");
+
+                        }
+
+                        else { Console.WriteLine("Запись с данным человеком отсутствует..."); }
+                    }
+                    break;
+                case "3":
+                    {
+                        a = 0;
+                        Console.WriteLine("Введите ID человека,запись которого вы хотите удалить: ");
+                        foreach (Person c in book.Values)
+                        {
+                            Console.WriteLine("Запись с Id-{0}, и имя пользователя-{1}", a, c.Name);
+                            a++;
+                        }
+                        int stroka = int.Parse(Console.ReadLine());
+                        if (book.Remove(stroka))
+                        {
+                            Console.WriteLine("Запись удалена");
+                        }
+                    }
+                    break;
+                case "4":
+                    {
+                        a = 0;
+                        foreach (Person c in book.Values)
+                        {
+                            Console.WriteLine("id-{0}, Имя-{1}", a, c.Name);
+                            a++;
+                        }
+                        bool d = true;
+                        while (d)
+                        {
+                            Console.WriteLine("Введите ID того,кто вам нужен и ИМЯ для уточнения: ");
+                            int line = int.Parse(Console.ReadLine());
+                            Name = Console.ReadLine();
+                            if (book.ElementAt(line).Value.Name == Name)
+                            {
+                                Console.WriteLine("Фамилия-{0}, Имя-{1},  Отчество-{2},  Телефон-{3},  Страна-{4}\n Дата рождения-{5},  Организация-{6},  Должность-{7},  Другое-{8}", Surname, Name, Patronymic, Phone, Country, BirthDate, Organization, Post, Notes);
+                                d = false;
+                                break;
+                            }
+                            a++;
+
+                            if (book.ElementAt(line).Value.Surname != Surname)
+                            {
+                                Console.WriteLine("Соответствие ID с Фамилией не найдено. \n Попробуйте снова.");
+                            }
+                        }
+                    }
+                    break;
+                case "5":
+                    {
+                        if (book != null)
+                        {
+                            b = 0;
+                            Console.Clear();
+                            Console.WriteLine("Все имеющиеся записи с краткой информацией:");
+                            foreach (Person c in book.Values)
+                            {
+                                Console.WriteLine("Записи с: фамилией-{0}, именем-{1} и телефоном-{2}", c.Surname, c.Name, c.Phone);
+                                b++;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+}
+class Person
+    {
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
+        public long Phone { get; set; }
+        public string Country { get; set; }
+        public string BirthDate { get; set; }
+        public string Organization { get; set; }
+        public string Post { get; set; }
+        public string Notes { get; set; }
+
+
+        public Person(string Surname, string Name, string Patronymic, long Phone, string Country, string BirthDate,
+            string Organization, string Post, string Notes)
+        {
+            this.Surname = Surname;
+            this.Name = Name;
+            this.Patronymic = Patronymic;
+            this.Phone = Phone;
+            this.Country = Country;
+            this.BirthDate = BirthDate;
+            this.Organization = Organization;
+            this.Post = Post;
+            this.Notes = Notes;
+        }
+    }
