@@ -117,7 +117,7 @@ namespace PhoneBook
                         int q = int.Parse(Console.ReadLine());
                         string str = "";
                         NoteBook sr = new NoteBook();
-                        Console.WriteLine("Введите то,что хотите поменять: Фамилия, Имя, Отчество, Телефон, Страна, Дата рождения, Организация, Должность, Прочие заметки. ");
+                        Console.WriteLine("Введите то,что хотите поменять:\nФамилия \nИмя \nОтчество \nТелефон \nСтрана \nДата рождения \nОрганизация \nДолжность \nПрочие заметки ");
                         str = Console.ReadLine();
                         sr.Operation(str);
 
@@ -151,11 +151,11 @@ namespace PhoneBook
                             Console.WriteLine("Введите новый номер телефона: ");
                             while (Phone == 0)
                             {
-                                Console.WriteLine("Введите номер телефона: ");
+
                                 str = Console.ReadLine();
                                 if (Numeric(str))
                                 {
-                                    book.ElementAt(q).Value.Phone = Convert.ToInt64(Phone);
+                                    Phone = Convert.ToInt64(str);
                                 }
                                 else
                                 {
@@ -232,7 +232,7 @@ namespace PhoneBook
                             Name = Console.ReadLine();
                             if (book.ElementAt(line).Value.Name == Name)
                             {
-                                Console.WriteLine("Фамилия-{0}, Имя-{1},  Отчество-{2},  Телефон-{3},  Страна-{4}\n Дата рождения-{5},  Организация-{6},  Должность-{7},  Другое-{8}", Surname, Name, Patronymic, Phone, Country, BirthDate, Organization, Post, Notes);
+                                Console.WriteLine("Фамилия-{0}, Имя-{1},  Отчество-{2},  Телефон-{3},  Страна-{4},  Дата рождения-{5},  Организация-{6},  Должность-{7},  Другое-{8}", Surname, Name, Patronymic, Phone, Country, BirthDate, Organization, Post, Notes);
                                 d = false;
                                 break;
                             }
@@ -265,29 +265,29 @@ namespace PhoneBook
     }
 }
 class Person
+{
+    public string Surname { get; set; }
+    public string Name { get; set; }
+    public string Patronymic { get; set; }
+    public long Phone { get; set; }
+    public string Country { get; set; }
+    public string BirthDate { get; set; }
+    public string Organization { get; set; }
+    public string Post { get; set; }
+    public string Notes { get; set; }
+
+
+    public Person(string Surname, string Name, string Patronymic, long Phone, string Country, string BirthDate,
+        string Organization, string Post, string Notes)
     {
-        public string Surname { get; set; }
-        public string Name { get; set; }
-        public string Patronymic { get; set; }
-        public long Phone { get; set; }
-        public string Country { get; set; }
-        public string BirthDate { get; set; }
-        public string Organization { get; set; }
-        public string Post { get; set; }
-        public string Notes { get; set; }
-
-
-        public Person(string Surname, string Name, string Patronymic, long Phone, string Country, string BirthDate,
-            string Organization, string Post, string Notes)
-        {
-            this.Surname = Surname;
-            this.Name = Name;
-            this.Patronymic = Patronymic;
-            this.Phone = Phone;
-            this.Country = Country;
-            this.BirthDate = BirthDate;
-            this.Organization = Organization;
-            this.Post = Post;
-            this.Notes = Notes;
-        }
+        this.Surname = Surname;
+        this.Name = Name;
+        this.Patronymic = Patronymic;
+        this.Phone = Phone;
+        this.Country = Country;
+        this.BirthDate = BirthDate;
+        this.Organization = Organization;
+        this.Post = Post;
+        this.Notes = Notes;
     }
+}
